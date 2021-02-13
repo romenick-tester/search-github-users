@@ -1,9 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 import { GithubContext } from "../context/context";
-import { ExampleChart, Pie3D, Column3D, Bar3D, Doughnut2D } from "./Charts";
+import PieChart from "./Chart";
+
 const Repos = () => {
-  return <h2>repos component</h2>;
+  const { repos } = React.useContext(GithubContext);
+  //const {  } = repos;
+
+  const chartData = {
+    chart: {
+      caption: "Used Languages",
+      subCaption: "Some Kind Of Text Here",
+      //xAxisName: "Country",
+      //yAxisName: "Reserves (MMbbl)",
+      numberSuffix: "%",
+      theme: "fusion"
+    },
+    data: [
+      {
+        label: "HTML",
+        value: "10"
+      },
+      {
+        label: "CSS",
+        value: "10"
+      },
+      {
+        label: "Javascript",
+        value: "80"
+      }
+    ]
+  }
+
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        <PieChart data={chartData} />
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`

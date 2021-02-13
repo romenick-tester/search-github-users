@@ -72,7 +72,7 @@ const mockFollowers = [
     avatar_url: "https://specials-images.forbesimg.com/imageserve/1139833733/960x0.jpg?fit=scale",
     gravatar_id: "",
     url: "https://api.github.com/users/Kemmy91",
-    html_url: "https://github.com/Kemmy91",
+    html_url: "https://github.com/kim-jong-un",
     followers_url: "https://api.github.com/users/Kemmy91/followers",
     following_url:
       "https://api.github.com/users/Kemmy91/following{/other_user}",
@@ -109,13 +109,13 @@ const mockFollowers = [
     site_admin: false,
   },
   {
-    login: "Turanwest",
+    login: "Kanye-West",
     id: 40670951,
     node_id: "MDQ6VXNlcjQwNjcwOTUx",
-    avatar_url: "https://avatars1.githubusercontent.com/u/40670951?v=4",
+    avatar_url: "https://yt3.ggpht.com/ytc/AAUvwnhPRS7ebQ_YY68jxN4c1VeovWKo4rR0ovbuJbpzTQ=s900-c-k-c0x00ffffff-no-rj",
     gravatar_id: "",
     url: "https://api.github.com/users/Turanwest",
-    html_url: "https://github.com/Turanwest",
+    html_url: "https://github.com/kanye-west",
     followers_url: "https://api.github.com/users/Turanwest/followers",
     following_url:
       "https://api.github.com/users/Turanwest/following{/other_user}",
