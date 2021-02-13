@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import styled from 'styled-components';
-import loginImg from '../images/login-img.svg';
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import styled from "styled-components";
+import loginImg from "../images/login-img.svg";
 const Login = () => {
   return <h2>login page</h2>;
 };
