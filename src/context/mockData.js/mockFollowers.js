@@ -1,4 +1,4 @@
-export default [
+const mockFollowers = [
   {
     login: "ThaELL1",
     id: 37319124,
@@ -17,6 +17,29 @@ export default [
     repos_url: "https://api.github.com/users/ThaELL1/repos",
     events_url: "https://api.github.com/users/ThaELL1/events{/privacy}",
     received_events_url: "https://api.github.com/users/ThaELL1/received_events",
+    type: "User",
+    site_admin: false,
+  },
+  {
+    login: "john-smilga",
+    id: 42133389,
+    node_id: "MDQ6VXNlcjQyMTMzMzg5",
+    avatar_url: "https://avatars3.githubusercontent.com/u/42133389?v=4",
+    gravatar_id: "",
+    url: "https://api.github.com/users/john-smilga",
+    html_url: "https://github.com/john-smilga",
+    followers_url: "https://api.github.com/users/john-smilga/followers",
+    following_url:
+      "https://api.github.com/users/john-smilga/following{/other_user}",
+    gists_url: "https://api.github.com/users/john-smilga/gists{/gist_id}",
+    starred_url:
+      "https://api.github.com/users/john-smilga/starred{/owner}{/repo}",
+    subscriptions_url: "https://api.github.com/users/john-smilga/subscriptions",
+    organizations_url: "https://api.github.com/users/john-smilga/orgs",
+    repos_url: "https://api.github.com/users/john-smilga/repos",
+    events_url: "https://api.github.com/users/john-smilga/events{/privacy}",
+    received_events_url:
+      "https://api.github.com/users/john-smilga/received_events",
     type: "User",
     site_admin: false,
   },
@@ -674,3 +697,5 @@ export default [
     site_admin: false,
   },
 ];
+
+export default mockFollowers;
