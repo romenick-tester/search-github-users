@@ -2,7 +2,7 @@ const mockUser = {
   login: "romenick-tester",
   id: 75784246,
   node_id: "MDQ6VXNlcjc1Nzg0MjQ2",
-  avatar_url: "https://avatars.githubusercontent.com/u/75784246?v=4",
+  avatar_url: "https://avatars.githubusercontent.com/u/67588995?v=4",
   gravatar_id: "",
   url: "https://api.github.com/users/romenick-tester",
   html_url: "https://github.com/romenick-tester",
