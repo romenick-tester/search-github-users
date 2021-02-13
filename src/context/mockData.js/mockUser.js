@@ -26,7 +26,7 @@ const mockUser = {
   bio: "Creator of Wicked Code!",
   twitter_username: "nick_tester",
   public_repos: 50,
-  public_gists: 0,
+  public_gists: 35,
   followers: 10495,
   following: 3,
   created_at: "2021-08-06T06:48:23Z",
