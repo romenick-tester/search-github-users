@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { GithubContext } from "../context/context";
-import Chart from "./Chart";
-
-import {pieChartData,doughnutChartData} from "./chartData";
+import {
+  PieChart2D, 
+  ColumnChart3D, 
+  DoughnutChart2D, 
+  BarChart3D } from "./charts";
 
 const Repos = () => {
   const { repos } = React.useContext(GithubContext);
@@ -32,9 +34,10 @@ const Repos = () => {
   return (
     <section className="section">
       <Wrapper className="section-center">
-        <Chart id={1} data={{ ...pieChartData, data: mostUsedLanguages }} type="pie3d" />
-        <div></div>
-        <Chart id={2} data={{ ...doughnutChartData, data: mostPopularLanguages }} type="doughnut2d" />
+        <PieChart2D data={mostUsedLanguages} />
+        <ColumnChart3D data={mostPopularLanguages} />
+        <DoughnutChart2D data={mostPopularLanguages} />
+        <BarChart3D data={mostUsedLanguages} />
       </Wrapper>
     </section>
   );

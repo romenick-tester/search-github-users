@@ -18,8 +18,8 @@ const Chart = ({ id, data, type }) => {
     dataFormat: 'json',
     dataSource: {...data},
   };
-  
-  if(id === 2) {
+
+  if(id === 3) {
     return <ReactFC1 {...chartConfigs} />
   } 
   
