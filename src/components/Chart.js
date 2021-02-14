@@ -1,23 +1,37 @@
 import React from 'react';
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
-import ReactFC from 'react-fusioncharts';
+import ReactFC1 from 'react-fusioncharts';
+import ReactFC2 from 'react-fusioncharts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import CandyTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
+import { pieChartData } from "./chartData"
 
-ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
+ReactFC1.fcRoot(FusionCharts, Charts, CandyTheme);
+ReactFC2.fcRoot(FusionCharts, Charts, FusionTheme);
 
-const PieChart = ({ data }) => {
-    const chartConfigs = {
-      type: 'pie3d',
-      width: 500,
-      height: 400,
-      dataFormat: 'json',
-      dataSource: {...data},
-    };
+const Chart = ({ id, data, type }) => {
+  const chartConfigs = {
+    type,
+    width: "100%",
+    height: 400,
+    dataFormat: 'json',
+    dataSource: {...data},
+  };
   
-    return (
-      <ReactFC {...chartConfigs} />
-    )
+  if(id === 2) {
+    return <ReactFC1 {...chartConfigs} />
+  } 
+  
+  return (
+    <ReactFC2 {...chartConfigs} />
+  )
 }
 
-export default PieChart;
+Chart.defaultProps = {
+  type: "pie2d",
+  data: pieChartData,
+  id: (Math.floor(Math.random() * 9) + 1) + (Math.floor(Math.random() * 9) + 1)
+}
+
+export default Chart;
