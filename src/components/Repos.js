@@ -3,26 +3,39 @@ import styled from "styled-components";
 import { GithubContext } from "../context/context";
 import PieChart from "./Chart";
 
-//chart datas
-import { pieChartData } from "./chartData";
-
 const Repos = () => {
   const { repos } = React.useContext(GithubContext);
-  //const {  } = repos;
 
-  const dataFormatter = {
+  let languages = repos.reduce((total, item) => {
+    const { language } = item;
+    if(!language) return total;
+    if(!total[language]){
+      total[language] = { label: language, value: 1 };
+    } else {
+      total[language] = { ...total[language], value: total[language].value + 1 };
+    }
+    return total;
+  }, {})
+
+  languages = Object.values(languages).sort((a,b) => b.value - a.value).slice(0,5);
+
+  const data = {
     chart: {
-    ...pieChartData.chart
+      caption: "Used Languages",
+      pieRadius: "50%",
+      numberSuffix: "%",
+      decimals: 0,
+      theme: "fusion",
     },
     data: [
-      ...pieChartData.data
+      ...languages
     ]
   }
 
   return (
     <section className="section">
       <Wrapper className="section-center">
-        <PieChart data={dataFormatter} />
+        <PieChart data={data} />
       </Wrapper>
     </section>
   );
