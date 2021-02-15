@@ -14,9 +14,9 @@ const GithubProvider = ({ children }) => {
     const [followers, setFollowers] = useState(mockFollowers);
     const [requests, setRequests] = useState(0);
     const [loading, setLoading] = useState(false);
-    //error usestate
+    const [error, setError] = useState({show: false, msg: ""});
 
-    const checkRequest = async() => {
+    const checkRequests = async() => {
         setLoading(true);
         try {
             const { data } = await axios.get(`${rootUrl}/rate_limit`);
@@ -26,7 +26,7 @@ const GithubProvider = ({ children }) => {
                 let { rate: { remaining } } = data;
                 setRequests(remaining);
                 if(remaining === 0) {
-                    //throw error
+                    toggleError(true, "sorry you've run out of requests! please try again in an hour time.");
                 }
             } else {
                 setLoading(false);
@@ -38,12 +38,16 @@ const GithubProvider = ({ children }) => {
         }
     }
 
+    function toggleError(show = false, msg = "") {
+        setError({show, msg});
+    };
+
     useEffect(() => {
-        checkRequest();
+        checkRequests();
     }, [])
 
     const globalValues = {
-        githubUser, repos, followers, requests,
+        githubUser, repos, followers, requests, error,
         setGithubUser,
     }
 
