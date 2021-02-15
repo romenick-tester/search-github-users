@@ -5,6 +5,8 @@ import mockFollowers from "./mockData.js/mockFollowers";
 import axios from "axios";
 
 const rootUrl = "https://api.github.com";
+//  `${rootUrl}/users/${user}/repos?per_page=100`;
+//  `${rootUrl}/users/${user}/followers`;
 
 const GithubContext = React.createContext();
 
@@ -19,13 +21,25 @@ const GithubProvider = ({ children }) => {
     const searchGithubUser = React.useCallback(async(user) => {
         toggleError();
         if(user){
-            setIsLoading(true)
+            setIsLoading(true);
             try {
-                const { data } = await axios.get(`${rootUrl}/users/${user}`);
-                if(data) {
+                const { data: userData } = await axios.get(`${rootUrl}/users/${user}`);
+                if(userData) {
+                    setGithubUser(userData);
+                    
+                    const { login, followers_url } = userData;
+                    
+                    const { data: repoData } = await axios.get(`${rootUrl}/users/${login}/repos?per_page=100`);
+                    const { data: followersData } = await axios.get(`${followers_url}?per_page=100`);
+                    
+                    if(repoData){
+                        setRepos(repoData);
+                    }
+                    if(followersData){
+                        setFollowers(followersData);
+                    }
+                    
                     setIsLoading(false);
-                    setGithubUser(data);
-                    //more logic
                 } else {
                     setIsLoading(false);
                     toggleError(true, "User doesn't exists!");
