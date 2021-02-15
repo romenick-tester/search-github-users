@@ -31,17 +31,28 @@ const Repos = () => {
     return {...item, value: item.stars};
   }).slice(0,5);
 
+  let { stars, forks } = repos.reduce((total, item) => {
+    const { stargazers_count, name, forks } = item;
+    total.stars[stargazers_count] = { label: name, value: stargazers_count };
+    total.forks[forks] = { label: name, value: forks };
+    return total;
+  }, {stars: {}, forks: {}})
+  
+  stars = Object.values(stars).slice(-5).reverse();
+  forks = Object.values(forks).slice(-5).reverse();
+
   return (
     <section className="section">
       <Wrapper className="section-center">
         <PieChart2D data={mostUsedLanguages} />
-        <ColumnChart3D data={mostPopularLanguages} />
+        <ColumnChart3D data={stars} />
         <DoughnutChart2D data={mostPopularLanguages} />
-        <BarChart3D data={mostUsedLanguages} />
+        <BarChart3D data={forks} />
       </Wrapper>
     </section>
   );
 };
+
 
 const Wrapper = styled.div`
   display: grid;
