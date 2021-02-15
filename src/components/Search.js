@@ -5,7 +5,7 @@ import { GithubContext } from "../context/context";
 
 const Search = () => {
   const [user, setUser] = React.useState("");
-  const { requests, error, searchGithubUser, toggleError } = React.useContext(GithubContext);
+  const { requests, isError, searchGithubUser, toggleError, isLoading } = React.useContext(GithubContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,9 +19,9 @@ const Search = () => {
   return (
     <section className="section">
       <Wrapper className="section-center">
-        {error && error.show && (
+        {isError && isError.show && (
           <ErrorWrapper>
-            <p>{error.msg}</p>
+            <p>{isError.msg}</p>
           </ErrorWrapper>
         )}
         <form onSubmit={handleSubmit}>
@@ -32,7 +32,7 @@ const Search = () => {
               placeholder="enter github user" 
               value={user} onChange={(e) => setUser(e.target.value)} 
             />
-            {requests > 0 && <button type="submit">search</button>}
+            {requests > 0 && !isLoading && <button type="submit">search</button>}
           </div>
         </form>
         <h3>request: {requests} / 60</h3>

@@ -13,22 +13,22 @@ const GithubProvider = ({ children }) => {
     const [repos, setRepos] = useState(mockRepos);
     const [followers, setFollowers] = useState(mockFollowers);
     const [requests, setRequests] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState({show: false, msg: ""});
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState({show: false, msg: ""});
 
     const searchGithubUser = React.useCallback(async(user) => {
         toggleError();
         if(user){
-            setLoading(true)
+            setIsLoading(true)
             try {
                 const { data } = await axios.get(`${rootUrl}/users/${user}`);
                 if(data) {
-                    setLoading(false);
+                    setIsLoading(false);
                     setGithubUser(data);
                     //more logic
                 } else {
-                    setLoading(false);
-                    setError(true, "User doesn't exists!");
+                    setIsLoading(false);
+                    toggleError(true, "User doesn't exists!");
                     console.log("no data");
                 }
             } catch (error) {
@@ -41,29 +41,29 @@ const GithubProvider = ({ children }) => {
     },[])
 
     const checkRequests = async() => {
-        setLoading(true);
+        setIsLoading(true);
         try {
             const { data } = await axios.get(`${rootUrl}/rate_limit`);
             
             if(data) {
-                setLoading(false);
+                setIsLoading(false);
                 let { rate: { remaining } } = data;
                 setRequests(remaining);
                 if(remaining === 0) {
                     toggleError(true, "sorry you've run out of requests! please try again in an hour time.");
                 }
             } else {
-                setLoading(false);
+                setIsLoading(false);
                 console.log("error");
             }
-            setLoading(false);
+            setIsLoading(false);
         } catch (error) {
             console.error(error);
         }
     }
 
     function toggleError(show = false, msg = "") {
-        setError({show, msg});
+        setIsError({show, msg});
     };
 
     useEffect(() => {
@@ -75,7 +75,7 @@ const GithubProvider = ({ children }) => {
     }, [])
 
     const globalValues = {
-        githubUser, repos, followers, requests, error,
+        githubUser, repos, followers, requests, isError, isLoading,
         searchGithubUser, toggleError
     }
 
