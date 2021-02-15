@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import mockUser from "./mockData.js/mockUser";
 import mockRepos from "./mockData.js/mockRepos";
 import mockFollowers from "./mockData.js/mockFollowers";
@@ -15,6 +15,30 @@ const GithubProvider = ({ children }) => {
     const [requests, setRequests] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState({show: false, msg: ""});
+
+    const searchGithubUser = React.useCallback(async(user) => {
+        toggleError();
+        if(user){
+            setLoading(true)
+            try {
+                const { data } = await axios.get(`${rootUrl}/users/${user}`);
+                if(data) {
+                    setLoading(false);
+                    setGithubUser(data);
+                    //more logic
+                } else {
+                    setLoading(false);
+                    setError(true, "User doesn't exists!");
+                    console.log("no data");
+                }
+            } catch (error) {
+                console.error(error&&error.data?error.data.message:error.data);
+            }
+        } else {
+            console.log("no query found!");
+            return;
+        }
+    },[])
 
     const checkRequests = async() => {
         setLoading(true);
@@ -43,12 +67,16 @@ const GithubProvider = ({ children }) => {
     };
 
     useEffect(() => {
+        searchGithubUser();
+    }, [searchGithubUser])
+
+    useEffect(() => {
         checkRequests();
     }, [])
 
     const globalValues = {
         githubUser, repos, followers, requests, error,
-        setGithubUser,
+        searchGithubUser, toggleError
     }
 
     return (

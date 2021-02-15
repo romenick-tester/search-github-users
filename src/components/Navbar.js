@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Navbar = () => {
   return (
     <Wrapper>
-
+      <h4>Navbar Component</h4>
     </Wrapper>
   );
 };
