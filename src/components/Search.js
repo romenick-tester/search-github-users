@@ -5,16 +5,17 @@ import { GithubContext } from "../context/context";
 
 const Search = () => {
   const [user, setUser] = React.useState("");
+  const { requests } = React.useContext(GithubContext);
 
-  //const data = React.useContext(GithubContext);
+  if(requests) {
+    console.log(requests);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
     if(user) {
       console.log(user);
-    } else {
-      console.log("your query is empty!");
-    }
+    } 
   };
 
   return (
@@ -28,10 +29,10 @@ const Search = () => {
               placeholder="enter github user" 
               value={user} onChange={(e) => setUser(e.target.value)} 
             />
-            <button type="submit">search</button>
+            {requests > 0 && <button type="submit">search</button>}
           </div>
         </form>
-        <h3>request: 60 / 60</h3>
+        <h3>request: {requests} / 60</h3>
       </Wrapper>
     </section>
   )
