@@ -1,9 +1,9 @@
 import React from "react";
-import { GithubContext } from "../context/context";
+import { useGlobalContext } from "../context/context";
 import styled from "styled-components";
 
 const Followers = () => {
-  const { followers } = React.useContext(GithubContext);
+  const { followers } = useGlobalContext();
 
   return (
     <Wrapper>

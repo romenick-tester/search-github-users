@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
-import { GithubContext } from "../context/context";
+import { useGlobalContext} from "../context/context";
 
 const Search = () => {
   const [user, setUser] = React.useState("");
-  const { requests, isError, searchGithubUser, toggleError, isLoading } = React.useContext(GithubContext);
+  const { requests, isError, searchGithubUser, toggleError, isLoading } = useGlobalContext();
 
   function handleSubmit(e) {
     e.preventDefault();

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { GithubContext } from "../context/context";
+import { useGlobalContext } from "../context/context";
 import {
   PieChart2D, 
   ColumnChart3D, 
@@ -8,7 +8,7 @@ import {
   BarChart3D } from "./charts";
 
 const Repos = () => {
-  const { repos } = React.useContext(GithubContext);
+  const { repos } = useGlobalContext();
 
   const languages = repos.reduce((total, item) => {
     const { language, stargazers_count } = item;
