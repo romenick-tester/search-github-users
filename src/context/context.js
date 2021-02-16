@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import mockUser from "./mockData.js/mockUser";
 import mockRepos from "./mockData.js/mockRepos";
 import mockFollowers from "./mockData.js/mockFollowers";
@@ -18,7 +18,7 @@ const GithubProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState({show: false, msg: ""});
 
-    const searchGithubUser = React.useCallback(async(user) => {
+    const searchGithubUser = useCallback(async(user) => {
         toggleError();
         if(user){
             setIsLoading(true);
@@ -54,7 +54,7 @@ const GithubProvider = ({ children }) => {
         }
     },[])
 
-    const checkRequests = async() => {
+    const checkRequests = useCallback(async() => {
         setIsLoading(true);
         try {
             const { data } = await axios.get(`${rootUrl}/rate_limit`);
@@ -74,7 +74,7 @@ const GithubProvider = ({ children }) => {
         } catch (error) {
             console.error(error);
         }
-    }
+    },[])
 
     function toggleError(show = false, msg = "") {
         setIsError({show, msg});
@@ -86,7 +86,7 @@ const GithubProvider = ({ children }) => {
 
     useEffect(() => {
         checkRequests();
-    }, [])
+    }, [checkRequests])
 
     const globalValues = {
         githubUser, repos, followers, requests, isError, isLoading,

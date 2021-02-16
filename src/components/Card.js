@@ -13,14 +13,14 @@ const Card = () => {
         <img src={avatar_url} alt={name}/>
         <div>
           <h4>{name}</h4>
-          <p>@{twitter_username&&twitter_username||"N/A"}</p>
+          <p>@{twitter_username?twitter_username:"N/A"}</p>
         </div>
         <a href={html_url}>follow</a>
       </header>
-      <p className="bio">{bio&&bio||"N/A"}</p>
+      <p className="bio">{bio?bio:"N/A"}</p>
       <div className="links">
-        <p><MdBusiness/>{company&&company||"N/A"}</p>
-        <p><MdLocationOn/>{location&&location||"N/A"}</p>
+        <p><MdBusiness/>{company?company:"N/A"}</p>
+        <p><MdLocationOn/>{location?location:"N/A"}</p>
         <a href={`https://${blog}`}><MdLink/>{blog}</a>
       </div>
     </Wrapper>
