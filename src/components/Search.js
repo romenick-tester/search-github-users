@@ -5,7 +5,7 @@ import { useGlobalContext} from "../context/context";
 
 const Search = () => {
   const [user, setUser] = React.useState("");
-  const { requests, isError, searchGithubUser, toggleError, isLoading } = useGlobalContext();
+  const { requests, isError, searchGithubUser, toggleError, loading } = useGlobalContext();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,7 +32,7 @@ const Search = () => {
               placeholder="enter github user" 
               value={user} onChange={(e) => setUser(e.target.value)} 
             />
-            {requests > 0 && !isLoading && <button type="submit">search</button>}
+            {requests > 0 && !loading && <button type="submit">search</button>}
           </div>
         </form>
         <h3>request: {requests} / 60</h3>

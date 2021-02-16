@@ -15,13 +15,13 @@ const GithubProvider = ({ children }) => {
     const [repos, setRepos] = useState(mockRepos);
     const [followers, setFollowers] = useState(mockFollowers);
     const [requests, setRequests] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [isError, setIsError] = useState({show: false, msg: ""});
 
     const searchGithubUser = useCallback(async(user) => {
         toggleError();
         if(user){
-            setIsLoading(true);
+            setLoading(true);
             try {
                 const { data: userData } = await axios.get(`${rootUrl}/users/${user}`);
                 if(userData) {
@@ -39,9 +39,9 @@ const GithubProvider = ({ children }) => {
                         setFollowers(followersData);
                     }
                     
-                    setIsLoading(false);
+                    setLoading(false);
                 } else {
-                    setIsLoading(false);
+                    setLoading(false);
                     toggleError(true, "User doesn't exists!");
                     console.log("no data");
                 }
@@ -55,22 +55,22 @@ const GithubProvider = ({ children }) => {
     },[])
 
     const checkRequests = useCallback(async() => {
-        setIsLoading(true);
+        setLoading(true);
         try {
             const { data } = await axios.get(`${rootUrl}/rate_limit`);
             
             if(data) {
-                setIsLoading(false);
+                setLoading(false);
                 let { rate: { remaining } } = data;
                 setRequests(remaining);
                 if(remaining === 0) {
                     toggleError(true, "sorry you've run out of requests! please try again in an hour time.");
                 }
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 console.log("error");
             }
-            setIsLoading(false);
+            setLoading(false);
         } catch (error) {
             console.error(error);
         }
@@ -89,7 +89,7 @@ const GithubProvider = ({ children }) => {
     }, [checkRequests])
 
     const globalValues = {
-        githubUser, repos, followers, requests, isError, isLoading,
+        githubUser, repos, followers, requests, isError, loading,
         searchGithubUser, toggleError
     }
 

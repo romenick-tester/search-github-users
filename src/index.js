@@ -11,9 +11,10 @@ const clientId = process.env.REACT_APP_CLIENT_ID;
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider 
-      domain="dev-u-iq89g0.eu.auth0.com" 
+      domain="dev-c5vsg6gm.au.auth0.com" 
       clientId={clientId} 
-      redirectUri={window.location.origin}>
+      redirectUri={window.location.origin}
+      cacheLocation="localstorage">
       <GithubProvider>
         <App />
       </GithubProvider>

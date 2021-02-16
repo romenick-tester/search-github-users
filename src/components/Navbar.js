@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user, isLoading } = useAuth0();
   
+  if(isLoading) {
+    return <Wrapper>
+      <h2>Loading...</h2>
+    </Wrapper>
+  }
+
   const isUser = isAuthenticated && user;
 
   return (
